@@ -8,4 +8,4 @@ COPY . /app
 WORKDIR /app
 RUN uv sync --frozen --no-cache
 
-CMD ["/app/.venv/bin/fastapi", "run", "app/main.py"]
+CMD ["/app/.venv/bin/fastapi", "run", "app/main.py", "--port", "3000"]
