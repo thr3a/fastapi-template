@@ -45,11 +45,11 @@ jobs:
       # - name: Build and Push Docker Image
       #   run: kamal build push
 
+      - name: Setup cloudflared
+        uses: AnimMouse/setup-cloudflared@v2
+
       - name: Install cloudflared
-        run: |
-          curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-          dpkg-deb -x cloudflared.deb /tmp/
-          /tmp/usr/bin/cloudflared service install ${{ secrets.CF_TOKEN }}
+        run: cloudflared service install ${{ secrets.CF_TOKEN }}
 
       - name: Set up SSH key
         run: |
