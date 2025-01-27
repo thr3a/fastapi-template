@@ -48,8 +48,8 @@ jobs:
       - name: Install cloudflared
         run: |
           curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-          dpkg -i cloudflared.deb
-          /usr/local/bin/cloudflared service install ${{ secrets.CF_TOKEN }}
+          dpkg-deb -x cloudflared.deb /tmp/
+          /tmp/usr/bin/cloudflared service install ${{ secrets.CF_TOKEN }}
 
       - name: Set up SSH key
         run: |

@@ -64,7 +64,7 @@ env:
 #
 ssh:
   user: thr3a
-  proxy_command: "/usr/local/bin/cloudflared access ssh --hostname %h"
+  proxy_command: "/tmp/usr/bin/cloudflared access ssh --hostname %h"
 # Use a persistent storage volume.
 #
 # volumes:
