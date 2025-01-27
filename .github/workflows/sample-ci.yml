@@ -42,8 +42,8 @@ jobs:
       - name: Install Kamal
         run: gem install kamal
 
-      - name: Build and Push Docker Image
-        run: kamal build push
+      # - name: Build and Push Docker Image
+      #   run: kamal build push
 
       - name: Deploy to Server
         run: kamal deploy
