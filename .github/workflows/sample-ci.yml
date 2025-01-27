@@ -45,8 +45,5 @@ jobs:
       - name: Build and Push Docker Image
         run: kamal build push
 
-      # - name: Deploy to Server
-      #   run: kamal deploy
-      #   # run: kamal deploy -d production
-      #   env:
-      #     KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to Server
+        run: kamal deploy
