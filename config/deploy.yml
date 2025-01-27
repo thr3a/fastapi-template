@@ -2,7 +2,8 @@
 service: fastapi-template
 
 # Name of the container image.
-image: ${{ github.actor }}/${{ github.repository }}
+# image: ${{ github.actor }}/${{ github.repository }}
+image: thr3a/fastapi-template
 
 # Deploy to these servers.
 servers:
@@ -29,7 +30,7 @@ proxy:
 registry:
   # Specify the registry server, if you're not using Docker Hub
   server: ghcr.io
-  username: ${{ github.repository_owner }}
+  username: thr3a
 
   # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
