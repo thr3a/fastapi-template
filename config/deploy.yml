@@ -2,7 +2,7 @@
 service: fastapi-template
 
 # Name of the container image.
-image: ghcr.io/${{ github.actor }}/${{ github.repository }}
+image: ${{ github.actor }}/${{ github.repository }}
 
 # Deploy to these servers.
 servers:
