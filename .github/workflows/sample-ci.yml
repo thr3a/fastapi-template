@@ -17,46 +17,58 @@ jobs:
       KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
         with:
-          registry: ghcr.io
-          username: thr3a
-          password: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: unnecessary
+          # config: ${{ secrets.CONFIG }} # ssh_config; optional
+          # if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
 
-      # - name: Expose GitHub Runtime for cache
-      #   uses: crazy-max/ghaction-github-runtime@v3
-
-      - name: Set up Kamal
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.3"
-          bundler-cache: true
-
-      - name: Install Kamal
-        run: gem install kamal
-
-      # - name: Build and Push Docker Image
-      #   run: kamal build push
-
-      - name: Setup cloudflared
-        uses: AnimMouse/setup-cloudflared@v2
-
-      - name: Install cloudflared
-        run: cloudflared service install ${{ secrets.CF_TOKEN }}
-
-      - name: Set up SSH key
+      - name: test
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_SECRET }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H turai.work >> ~/.ssh/known_hosts
+          ssh -o ProxyCommand="cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret ${{ secrets.CF_TOKEN }} --hostname %h" ubuntu01.turai.work ls -l
 
-      - name: Deploy to Server
-        run: kamal deploy
+        # - name: Checkout code
+        #   uses: actions/checkout@v4
+
+        # - name: Set up Docker Buildx
+        #   uses: docker/setup-buildx-action@v3
+
+        # - name: Log in to the Container registry
+        #   uses: docker/login-action@v3
+        #   with:
+        #     registry: ghcr.io
+        #     username: thr3a
+        #     password: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+
+        # # - name: Expose GitHub Runtime for cache
+        # #   uses: crazy-max/ghaction-github-runtime@v3
+
+        # - name: Set up Kamal
+        #   uses: ruby/setup-ruby@v1
+        #   with:
+        #     ruby-version: "3.3"
+        #     bundler-cache: true
+
+        # - name: Install Kamal
+        #   run: gem install kamal
+
+        # # - name: Build and Push Docker Image
+        # #   run: kamal build push
+
+        # - name: Setup cloudflared
+        #   uses: AnimMouse/setup-cloudflared@v2
+
+        # - name: Install cloudflared
+        #   run: cloudflared service install ${{ secrets.CF_TOKEN }}
+
+        # - name: Set up SSH key
+        #   run: |
+        #     mkdir -p ~/.ssh
+        #     echo "${{ secrets.SSH_SECRET }}" > ~/.ssh/id_ed25519
+        #     chmod 600 ~/.ssh/id_ed25519
+        #     ssh-keyscan -H turai.work >> ~/.ssh/known_hosts
+
+        # - name: Deploy to Server
+        #   run: kamal deploy
