@@ -33,15 +33,15 @@ jobs:
           chmod +x /tmp/cloudflared/cloudflared
           /tmp/cloudflared/cloudflared --version
 
-      - name: ssh test
-        run: |
-          ssh ubuntu01.turai.work date
+      # - name: Test ssh
+      #   run: |
+      #     ssh ubuntu01.turai.work date
 
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -59,16 +59,9 @@ jobs:
       - name: Install Kamal
         run: gem install kamal
 
-      # - name: Build and Push Docker Image
-      #   run: kamal build push
-
-      # {{CF_TOKEN}} を hogehoge に置き換え
-      - name: Replace {{CF_TOKEN}} with hogehoge
+      - name: Replace CF_TOKEN
         run: |
           sed -i 's/CF_TOKEN/${{ secrets.CF_TOKEN }}/g' .github/workflows/sample-ci.yml
 
       - name: Deploy to Server
-        run: |
-          ssh ubuntu01.turai.work date
-          kamal deploy
-        # run: kamal deploy
+        run: kamal deploy
