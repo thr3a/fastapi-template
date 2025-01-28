@@ -35,7 +35,7 @@ jobs:
 
       - name: debug
         run: |
-          ssh ubuntu01.turai.work -v ls -l
+          ssh thr3a@ubuntu01.turai.work ls -l
 
         # - name: Checkout code
         #   uses: actions/checkout@v4
