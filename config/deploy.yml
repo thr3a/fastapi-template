@@ -64,7 +64,7 @@ env:
 #
 ssh:
   user: thr3a
-  proxy_command: /tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret <%= ENV["CF_TOKEN"] %> --hostname %h
+  proxy_command: /tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret 79419770fb26e236ea664038d572bc456e5055c0b25d978b72c0ef9decee48e2 --hostname %h
 # Use a persistent storage volume.
 #
 # volumes:
