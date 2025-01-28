@@ -39,7 +39,7 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
-  local: true
+  local: false
   cache:
     type: gha
   # secrets:
