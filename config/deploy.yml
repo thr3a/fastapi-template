@@ -61,8 +61,8 @@ env:
 
 # Use a different ssh user than root
 #
-# ssh:
-#   user: thr3a
+ssh:
+  config: true
 #   proxy_command: "cloudflared access ssh --hostname %h"
 # Use a persistent storage volume.
 #
