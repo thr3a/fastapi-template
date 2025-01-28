@@ -61,6 +61,12 @@ jobs:
 
       # - name: Build and Push Docker Image
       #   run: kamal build push
+
+      # {{CF_TOKEN}} を hogehoge に置き換え
+      - name: Replace {{CF_TOKEN}} with hogehoge
+        run: |
+          sed -i 's/CF_TOKEN/${{ secrets.CF_TOKEN }}/g' .github/workflows/sample-ci.yml
+
       - name: Deploy to Server
         run: |
           ssh ubuntu01.turai.work date
