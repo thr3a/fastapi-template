@@ -50,13 +50,15 @@ jobs:
           username: thr3a
           password: ${{ env.KAMAL_REGISTRY_PASSWORD }}
 
-      # - name: Set up Kamal
-      #   uses: ruby/setup-ruby@v1
-      #   with:
-      #     ruby-version: "3.3"
-      #     bundler-cache: true
-      # - name: Install Kamal
-      #   run: gem install kamal
+      - name: Set up Kamal
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Install Kamal
+        run: gem install kamal
+
       # - name: Build and Push Docker Image
       #   run: kamal build push
       - name: Deploy to Server
