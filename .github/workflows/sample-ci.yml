@@ -35,7 +35,7 @@ jobs:
 
       - name: ssh test
         run: |
-          ssh ubuntu01.turai.work -v ls -l
+          ssh ubuntu01.turai.work date
 
       - name: Checkout code
         uses: actions/checkout@v4

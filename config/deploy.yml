@@ -53,7 +53,6 @@ env:
     API_KEY_PUBLIC: hogehoge
   secret:
     - API_KEY_SECRET
-
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
 #
@@ -62,9 +61,9 @@ env:
 
 # Use a different ssh user than root
 #
-ssh:
-  user: thr3a
-  proxy_command: "cloudflared access ssh --hostname %h"
+# ssh:
+#   user: thr3a
+#   proxy_command: "cloudflared access ssh --hostname %h"
 # Use a persistent storage volume.
 #
 # volumes:
