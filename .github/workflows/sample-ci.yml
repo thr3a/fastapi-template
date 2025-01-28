@@ -23,7 +23,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: unnecessary
           name: id_ed25519
-          config: ${{ secrets.SSH_CONFIG }}
+          # config: ${{ secrets.CONFIG }} # ssh_config; optional
+          # if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
 
       - name: Install cloudflared
         run: |
@@ -33,9 +34,9 @@ jobs:
           chmod +x /tmp/cloudflared/cloudflared
           /tmp/cloudflared/cloudflared --version
 
-      - name: debug
+      - name: test
         run: |
-          ssh thr3a@ubuntu01.turai.work ls -l
+          ssh -o StrictHostKeyChecking=no -o ProxyCommand="/tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret ${{ secrets.CF_TOKEN }} --hostname %h" thr3a@ubuntu01.turai.work -v ls -l
 
         # - name: Checkout code
         #   uses: actions/checkout@v4
