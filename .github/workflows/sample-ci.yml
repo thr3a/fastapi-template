@@ -36,7 +36,7 @@ jobs:
 
       - name: test
         run: |
-          ssh -o StrictHostKeyChecking=no -o ProxyCommand="/tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret ${{ secrets.CF_TOKEN }} --hostname %h" thr3a@ubuntu01.turai.work -v ls -l
+          ssh -o ProxyCommand="/tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret ${{ secrets.CF_TOKEN }} --hostname %h" thr3a@ubuntu01.turai.work -v ls -l
         # run: |
         #   ssh -o StrictHostKeyChecking=no -o ProxyCommand="/tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret ${{ secrets.CF_TOKEN }} --hostname %h" thr3a@ubuntu01.turai.work -v ls -l
 
