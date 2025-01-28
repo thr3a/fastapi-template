@@ -63,11 +63,11 @@ jobs:
         run: |
           sed -i 's/CF_TOKEN/${{ secrets.CF_TOKEN }}/g' .github/workflows/sample-ci.yml
 
-      - name: hoge
-        run: kamal build push
+      # - name: hoge
+      #   run: kamal build push
 
-      - name: hoge
-        run: kamal build pull
+      # - name: hoge
+      #   run: kamal build pull
 
       - name: Deploy to Server
         run: kamal deploy
