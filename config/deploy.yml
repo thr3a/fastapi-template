@@ -7,7 +7,7 @@ image: thr3a/fastapi-template
 # Deploy to these servers.
 servers:
   web:
-    - ubuntu01.turai.work
+    - ubuntu01.local
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -59,7 +59,7 @@ env:
 #
 ssh:
   user: thr3a
-  proxy_command: /tmp/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret CF_TOKEN --hostname %h
+  # proxy_command: /tmp/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret CF_TOKEN --hostname %h
 # Use a persistent storage volume.
 #
 # volumes:
