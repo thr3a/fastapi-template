@@ -50,6 +50,24 @@ jobs:
           username: thr3a
           password: ${{ env.KAMAL_REGISTRY_PASSWORD }}
 
+      - name: hoge
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.actor }}/fastapi-template
+          tags: |
+            type=raw,value=latest
+            type=sha,prefix=,suffix=,format=short
+
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          provenance: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
       - name: Set up Kamal
         uses: ruby/setup-ruby@v1
         with:
@@ -70,4 +88,4 @@ jobs:
       #   run: kamal build pull
 
       - name: Deploy to Server
-        run: kamal deploy
+        run: kamal deploy --skip-push
