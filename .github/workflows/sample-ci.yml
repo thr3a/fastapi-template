@@ -57,7 +57,7 @@ jobs:
           images: ghcr.io/${{ github.actor }}/fastapi-template
           tags: |
             type=raw,value=latest
-            type=sha,prefix=,suffix=,format=short
+            type=sha,prefix=,suffix,format=long
 
       - name: Build image
         uses: docker/build-push-action@v5
