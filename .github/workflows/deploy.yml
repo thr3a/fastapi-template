@@ -13,8 +13,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      KAMAL_REGISTRY_USERNAME: thr3a
-      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      APP_NAME: thr3a
 
     steps:
       - name: Install SSH key
@@ -48,18 +47,18 @@ jobs:
         with:
           registry: ghcr.io
           username: thr3a
-          password: ${{ env.KAMAL_REGISTRY_PASSWORD }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: hoge
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.actor }}/fastapi-template
+          images: ghcr.io/${{ github.actor }}/${{ env.APP_NAME }}
           tags: |
             type=raw,value=latest
             type=sha,prefix=,suffix,format=long
           labels: |
-            service=fastapi-template
+            service=${{ env.APP_NAME }}
 
       - name: Build image
         uses: docker/build-push-action@v5
@@ -82,13 +81,10 @@ jobs:
 
       - name: Replace CF_TOKEN
         run: |
-          sed -i 's/CF_TOKEN/${{ secrets.CF_TOKEN }}/g' .github/workflows/sample-ci.yml
-
-      # - name: hoge
-      #   run: kamal build push
-
-      # - name: hoge
-      #   run: kamal build pull
+          sed -i 's/CF_TOKEN/${{ secrets.CF_TOKEN }}/g' .github/workflows/deploy.yml
 
       - name: Deploy to Server
         run: kamal deploy --skip-push
+        env:
+          KAMAL_REGISTRY_USERNAME: thr3a
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
