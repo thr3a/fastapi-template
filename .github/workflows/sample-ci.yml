@@ -51,6 +51,7 @@ jobs:
           password: ${{ env.KAMAL_REGISTRY_PASSWORD }}
 
       - name: hoge
+        id: meta
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.actor }}/fastapi-template
