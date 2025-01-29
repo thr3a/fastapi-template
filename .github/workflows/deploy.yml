@@ -63,7 +63,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: unnecessary
           name: id_ed25519
-          config: ${{ secrets.SSH_CONFIG }}
+          # config: ${{ secrets.SSH_CONFIG }}
 
       - name: Install cloudflared
         run: |

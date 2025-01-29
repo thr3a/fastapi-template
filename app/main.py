@@ -10,7 +10,7 @@ app.include_router(items.router)
 
 @app.get("/")
 async def root():
-    return {"message": "nyaa4"}
+    return {"message": "nyaa5"}
 
 
 @app.get("/health")
