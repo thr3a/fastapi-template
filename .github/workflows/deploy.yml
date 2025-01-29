@@ -13,7 +13,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      APP_NAME: thr3a
+      APP_NAME: fastapi-template
 
     steps:
       - name: Install SSH key
