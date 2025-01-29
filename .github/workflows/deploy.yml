@@ -26,11 +26,9 @@ jobs:
 
       - name: Install cloudflared
         run: |
-          lastest_version=$(curl -s $GITHUB_API_URL/repos/cloudflare/cloudflared/releases/latest | jq -r '.tag_name')
-          mkdir -p /tmp/cloudflared
-          curl -sL -o /tmp/cloudflared/cloudflared $GITHUB_SERVER_URL/cloudflare/cloudflared/releases/download/$lastest_version/cloudflared-linux-amd64
-          chmod +x /tmp/cloudflared/cloudflared
-          /tmp/cloudflared/cloudflared --version
+          curl -sL -o /tmp/cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+          chmod +x /tmp/cloudflared
+          /tmp/cloudflared --version
 
       # - name: Test ssh
       #   run: |
@@ -49,7 +47,7 @@ jobs:
           username: thr3a
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: hoge
+      - name: Generate Docker Image Metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
@@ -60,7 +58,7 @@ jobs:
           labels: |
             service=${{ env.APP_NAME }}
 
-      - name: Build image
+      - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -70,7 +68,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Set up Kamal
+      - name: Set up Ruby for Kamal
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
@@ -79,7 +77,7 @@ jobs:
       - name: Install Kamal
         run: gem install kamal
 
-      - name: Replace CF_TOKEN
+      - name: Replace Cloudflare Token (CF_TOKEN)
         run: |
           sed -i 's/CF_TOKEN/${{ secrets.CF_TOKEN }}/g' .github/workflows/deploy.yml
 

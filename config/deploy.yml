@@ -38,10 +38,6 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
-  cache:
-    type: gha
-  # secrets:
-  #   - GITHUB_TOKEN
   # Pass in additional build args needed for your Dockerfile.
   # args:
   #   RUBY_VERSION: <%= File.read('.ruby-version').strip %>
@@ -63,7 +59,7 @@ env:
 #
 ssh:
   user: thr3a
-  proxy_command: /tmp/cloudflared/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret CF_TOKEN --hostname %h
+  proxy_command: /tmp/cloudflared access ssh --id a01e19ab8d887fda817582956d1cc1e9.access --secret CF_TOKEN --hostname %h
 # Use a persistent storage volume.
 #
 # volumes:

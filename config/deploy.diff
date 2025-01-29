@@ -1,5 +1,5 @@
 --- deploy_orig.yml	2025-01-27 01:00:59
-+++ deploy.yml	2025-01-29 15:06:32
++++ deploy.yml	2025-01-29 15:08:38
 @@ -1,13 +1,13 @@
  # Name of your application. Used to uniquely configure containers.
 -service: my-app
@@ -41,14 +41,7 @@
  
    # Always use an access token rather than real password (pulled from .kamal/secrets).
    password:
-@@ -36,17 +38,20 @@
- # Configure builder setup.
- builder:
-   arch: amd64
-+  cache:
-+    type: gha
-+  # secrets:
-+  #   - GITHUB_TOKEN
+@@ -39,14 +41,13 @@
    # Pass in additional build args needed for your Dockerfile.
    # args:
    #   RUBY_VERSION: <%= File.read('.ruby-version').strip %>
@@ -68,7 +61,7 @@
  
  # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
  # "bin/kamal logs -r job" will tail logs from the first server in the job section.
-@@ -56,9 +61,9 @@
+@@ -56,9 +57,9 @@
  
  # Use a different ssh user than root
  #
