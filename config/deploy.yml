@@ -7,7 +7,7 @@ image: thr3a/fastapi-template
 # Deploy to these servers.
 servers:
   web:
-    - ubuntu01.local
+    - ubuntu02.local
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -24,12 +24,14 @@ proxy:
   app_port: 3000
   healthcheck:
     path: /health
+    interval: 20
+    timeout: 3
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
-  server: ghcr.io
-  username: KAMAL_REGISTRY_USERNAME
+  # server: ghcr.io
+  username: thr3a
 
   # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
